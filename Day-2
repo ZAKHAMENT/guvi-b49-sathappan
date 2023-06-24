@@ -1,0 +1,14 @@
+1.)Write a blog about document object and 
+The Document Object:
+ The Document object represents the web page itself and provides access to its content. It serves as an interface to manipulate the structure, style, and elements of an HTML document. When the browser loads an HTML page, it creates a Document object that represents the entire document.
+Key characteristics of the Document object include:
+*  DOM manipulation
+* Selecting elements
+* Document structure
+
+The Window Object: 
+The Window object represents the browser window or tab that contains the web page. It acts as an interface between the web page and the browser, providing access to various browser-related functionalities and properties.
+Key characteristics of the Window object include:
+* Global scope
+*Browser interaction
+*Time and event
