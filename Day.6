@@ -1,0 +1,73 @@
+// Day-6
+//1.)
+class Person {
+    constructor(firstName, lastName, age, gender, ambition) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.age = age;
+      this.gender = gender;
+      this.ambition = ambition;
+    }
+  
+    getFullName() {
+      return `${this.firstName} ${this.lastName}`;
+    }
+  
+    getAge() {
+      return this.age;
+    }
+  
+    getGender() {
+      return this.gender;
+    }
+    
+    getAmbition(){
+        return this.ambition;
+    }
+  
+    setFirstName(firstName) {
+      this.firstName = firstName;
+    }
+  
+    setLastName(lastName) {
+      this.lastName = lastName;
+    }
+  
+    setAge(age) {
+      this.age = age;
+    }
+  
+    setGender(gender) {
+      this.gender = gender;
+    }
+    setAmbition(ambition){
+        this.ambition = ambition;
+    }
+  }
+  
+  
+  let person = new Person('Sathappan', 'Ramesh', 23, 'Male','Full Stack Developer');
+  
+  console.log("Name :" + person.getFullName());
+  console.log("Age :" + person.getAge());
+  console.log("Gender :" + person.getGender());
+  console.log("Ambition :" + person.getAmbition());
+  
+  
+  //2.)
+  
+  class UberPriceCalculator {
+    constructor(basePrice, costPerKilometer) {
+      this.basePrice = basePrice;
+      this.costPerKilometer = costPerKilometer;
+    }
+  
+    calculatePrice(distanceInKilometers) {
+      const totalFee = this.basePrice + this.costPerKilometer * distanceInKilometers;
+      return totalFee.toFixed(2);
+    }
+  }
+  
+  const priceCalculator = new UberPriceCalculator(5, 2);
+  const fee = priceCalculator.calculatePrice(10);
+  console.log(fee);
