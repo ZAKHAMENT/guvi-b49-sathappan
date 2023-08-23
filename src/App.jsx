@@ -1,123 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { CartProvider } from './CartContext';
+import Product from './Product';
+import Cart from './Cart';
 import './App.css';
-import TodoList from './TodoList'; // Import the child component
 
-function App() {
-  const [taskName, setTaskName] = useState('');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('not completed');
-  const [todos, setTodos] = useState([]);
-  const [filterStatus, setFilterStatus] = useState('all'); // Added filterStatus state
-  const [editedIndex, setEditedIndex] = useState(-1); // Index of the currently edited task
+const products = [
+  {
+    id: 1,
+    title: "iPhone 9",
+    description: "An apple mobile which is nothing like apple",
+    price: 549,
+    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+  },
 
-  const addTodo = () => {
-    if (taskName.trim() === '') {
-      alert('Task name cannot be empty');
-      return;
-    }
-    const newTodo = {
-      taskName,
-      description,
-      status,
-    };
-    setTodos([...todos, newTodo]);
-    setTaskName('');
-    setDescription('');
-    setStatus('not completed');
-  };
+  {
+    id: 1,
+    title: "iPhone X",
+    description: "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip",
+    price: 899,
+    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+  },
 
-  const startEdit = (index) => {
-    setEditedIndex(index);
-    setTaskName(todos[index].taskName);
-    setDescription(todos[index].description);
-  };
+  {
+    id: 1,
+    title: "Samsung Universe 9",
+    description: "Samsung's new variant which goes beyond Galaxy to the Universe",
+    price: 1249,
+    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+  },
 
-  const cancelEdit = () => {
-    setEditedIndex(-1);
-    setTaskName('');
-    setDescription('');
-  };
+  {
+    id: 1,
+    title: "OPPOF19",
+    description: "OPPO F19 is officially announced on April 2021",
+    price: 280,
+    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+  },
 
-  const saveEdit = (index) => {
-    const updatedTodos = [...todos];
-    updatedTodos[index].taskName = taskName;
-    updatedTodos[index].description = description;
-    setTodos(updatedTodos);
-    setEditedIndex(-1);
-    setTaskName('');
-    setDescription('');
-  };
+  {
+    id: 1,
+    title: "Huawei P30",
+    description: "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK",
+    price: 499,
+    thumbnail: "https://i.dummyjson.com/data/products/1/thumbnail.jpg"
+  }
+  // Add more product data here
+];
 
-  const deleteTodo = (index) => {
-    const updatedTodos = todos.filter((_, i) => i !== index);
-    setTodos(updatedTodos);
-  };
-
-  const changeStatus = (index, newStatus) => {
-    const updatedTodos = [...todos];
-    updatedTodos[index].status = newStatus;
-    setTodos(updatedTodos);
-  };
-
-  const filterTodos = (selectedStatus) => {
-    if (selectedStatus === 'all') {
-      return todos;
-    } else {
-      return todos.filter((todo) => todo.status === selectedStatus);
-    }
-  };
-
+const App = () => {
   return (
-    <div className="container">
-      <h1>Todo App</h1>
-      <div className="todo-form">
-        <input
-          type="text"
-          placeholder="Task Name"
-          value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
-        />
-        <textarea
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-        {editedIndex !== -1 ? (
-          <>
-            <button onClick={() => saveEdit(editedIndex)}>Save</button>
-            <button onClick={cancelEdit}>Cancel</button>
-          </>
-        ) : (
-          <button onClick={addTodo}>Add Todo</button>
-        )}
+    <CartProvider>
+      <div className="App">
+        {products.map(product => (
+          <Product
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            description={product.description}
+            price={product.price}
+            thumbnail={product.thumbnail}
+          />
+        ))}
+        <Cart />
       </div>
-      <div className="filter">
-        <label htmlFor="statusFilter">Filter by Status:</label>
-        <select
-          id="statusFilter"
-          onChange={(e) => setFilterStatus(e.target.value)}
-          value={filterStatus}
-        >
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="not completed">Not Completed</option>
-        </select>
-      </div>
-      {}
-      <TodoList
-        todos={filterTodos(filterStatus)}
-        startEdit={startEdit}
-        deleteTodo={deleteTodo}
-        changeStatus={changeStatus}
-        editedIndex={editedIndex}
-        taskName={taskName}
-        description={description}
-        setTaskName={setTaskName}
-        setDescription={setDescription}
-        saveEdit={saveEdit}
-      />
-    </div>
+    </CartProvider>
   );
-}
+};
 
 export default App;
