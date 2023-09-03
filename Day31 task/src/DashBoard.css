@@ -1,0 +1,25 @@
+.background-container {
+    background-image: url("/src/library.jpg"); /* Set the path to your image */
+    background-size: cover; /* Adjust the background size as needed */
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align:start;
+    color: #fff; /* Set text color to contrast with the background */
+    padding: 20px; /* Add padding to the container */
+    height: auto;
+  }
+  img{
+    width: 15%;
+    aspect-ratio: 1/2;
+    height: 50%;
+  }
+  h1 {
+    font-size: 36px; /* Adjust font size */
+    margin: 10px 0; /* Add spacing around the heading */
+  }
+  
+  h5 {
+    font-size: 18px; /* Adjust font size */
+    margin: 10px 0; /* Add spacing around the subheading */
+  }
+  
