@@ -1,5 +1,3 @@
-// Redux actions and reducers file (cartSlice.js)
-
 import { createSlice } from '@reduxjs/toolkit';
 
 const cartSlice = createSlice({
