@@ -1,5 +1,3 @@
-// Product.js
-
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from './cartSlice';
@@ -13,7 +11,7 @@ const Product = ({ title, description, price, image }) => {
 
   return (
     <div className="product">
-      <img src={image} alt="Product Thumbnail" /> {/* Use the image prop */}
+      <img src={image} alt="Product Thumbnail" />
       <h2>{title}</h2>
       <p>{description}</p>
       <p>Price: ${price}</p>
