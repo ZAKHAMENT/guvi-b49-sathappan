@@ -14,7 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+     origin: [
+      "http://localhost:5173",
+      "https://657ff893cd7a7c076bdda331--poetic-torte-c110f6.netlify.app",
+    ],
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     allowedHeaders: "Content-Type,Authorization",
