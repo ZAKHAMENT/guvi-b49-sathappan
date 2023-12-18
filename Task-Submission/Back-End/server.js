@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require("bcrypt");
 const session = require("express-session");
-const MongoStore = require("connect-mongo"); // Import connect-mongo correctly
+const MongoStore = require("connect-mongo"); 
 const app = express();
 
 app.use(express.json());
@@ -20,15 +20,6 @@ app.use(
     allowedHeaders: "Content-Type,Authorization",
   })
 );
-const corsOptions = {
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  allowedHeaders: 'Content-Type,Authorization',
-};
-
-app.use(cors(corsOptions));
-
 
 app.use(
   session({
