@@ -20,6 +20,15 @@ app.use(
     allowedHeaders: "Content-Type,Authorization",
   })
 );
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  allowedHeaders: 'Content-Type,Authorization',
+};
+
+app.use(cors(corsOptions));
+
 
 app.use(
   session({
