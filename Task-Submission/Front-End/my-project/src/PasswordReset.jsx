@@ -22,7 +22,7 @@ function PasswordReset() {
     try {
       setIsLoading(true); // Set loading to true when submitting
 
-      const response = await axios.post(`http://localhost:3000/api/reset-password/${token}`, {
+      const response = await axios.post(`https://task-portal.onrender.com/api/reset-password/${token}`, {
         token: token,
         newPassword: password,
       });
