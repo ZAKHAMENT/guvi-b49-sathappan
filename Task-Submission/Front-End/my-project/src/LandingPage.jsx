@@ -8,7 +8,7 @@ function LandingPage() {
 
   useEffect(() => {
     // Make a GET request to your server to check the user's registration status
-    axios.get('http://localhost:3000/check-registration-status') // Replace with your actual endpoint
+    axios.get('https://task-portal.onrender.com/check-registration-status') // Replace with your actual endpoint
       .then((response) => {
         // server responds with registration status
         const { registered } = response.data;
