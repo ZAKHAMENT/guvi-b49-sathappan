@@ -27,7 +27,7 @@ import Chart from 'chart.js/auto';
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const polarResponse = await axios.get('http://localhost:3000/get-polar-chart-data', {
+      const polarResponse = await axios.get('https://task-portal.onrender.com/get-polar-chart-data', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ useEffect(() => {
     }
 
     try {
-      const barResponse = await axios.get('http://localhost:3000/get-bar-chart-data', {
+      const barResponse = await axios.get('https://task-portal.onrender.com/get-bar-chart-data', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ useEffect(() => {
     // Function to fetch bar chart data
     const fetchBarChartData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/get-bar-chart-data', {
+        const response = await axios.get('https://task-portal.onrender.com/get-bar-chart-data', {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ useEffect(() => {
       useEffect(() => {
         const fetchSubmittedTasks = async () => {
           try {
-            const response = await axios.get('http://localhost:3000/get-submitted-tasks', {
+            const response = await axios.get('https://task-portal.onrender.com/get-submitted-tasks', {
               withCredentials: true,
               headers: {
                 'Content-Type': 'application/json',
@@ -405,7 +405,7 @@ useEffect(() => {
               try {
                 setIsLoading(true);
                 const response = await axios.post(
-                  'http://localhost:3000/submit-task',
+                  'https://task-portal.onrender.com/submit-task',
                   newTask,
                   {
                     withCredentials: true,
