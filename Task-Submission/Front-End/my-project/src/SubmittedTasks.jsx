@@ -7,7 +7,7 @@ function SubmittedTasks() {
 
   useEffect(() => {
     // HTTP request to fetch the submitted tasks from the server when the component loads.
-    axios.get('https://class-task-submission.onrender.com/get-submitted-tasks', { withCredentials: true })
+    axios.get('https://task-portal.onrender.com/get-submitted-tasks', { withCredentials: true })
     .then((response) => {
         if (response.status === 200) {
           setSubmittedTasks(response.data);
