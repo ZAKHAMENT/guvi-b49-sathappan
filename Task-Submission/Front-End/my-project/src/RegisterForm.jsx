@@ -52,7 +52,7 @@ function RegisterForm() {
     };
 
     try {
-      const response = await axios.post('http://localhost:3000/register', userData, {
+      const response = await axios.post('https://task-portal.onrender.com/register', userData, {
         headers: {
           'Content-Type': 'application/json',
         },
