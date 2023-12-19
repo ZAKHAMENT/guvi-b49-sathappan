@@ -18,7 +18,7 @@ function ForgotPassword() {
 
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/forgot-password',
+        'https://task-portal.onrender.com/api/forgot-password',
         { email },
         { withCredentials: true }
       );
