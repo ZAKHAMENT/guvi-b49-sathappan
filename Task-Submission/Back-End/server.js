@@ -14,10 +14,6 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-     origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-    allowedHeaders: "Content-Type,Authorization",
   })
 );
 
@@ -35,9 +31,9 @@ app.use(
 );
 
 const PORT = 3000;
-const DB_URL =
-  "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/Task_Submission?retryWrites=true&w=majority";
+const DB_URL = "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/Task_Submission?retryWrites=true&w=majority";
 
+ 
   mongoose
   .connect(DB_URL, {
     useNewUrlParser: true,
