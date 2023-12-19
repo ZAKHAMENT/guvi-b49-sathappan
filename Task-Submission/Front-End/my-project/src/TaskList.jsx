@@ -27,7 +27,7 @@ import Chart from 'chart.js/auto';
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const polarResponse = await axios.get('http://localhost:3000/get-polar-chart-data', {
+      const polarResponse = await axios.get('https://task-submission-portal-p7li.onrender.com/get-polar-chart-data', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ useEffect(() => {
     }
 
     try {
-      const barResponse = await axios.get('http://localhost:3000/get-bar-chart-data', {
+      const barResponse = await axios.get('https://task-submission-portal-p7li.onrender.com/get-bar-chart-data', {
         withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ useEffect(() => {
     // Function to fetch bar chart data
     const fetchBarChartData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/get-bar-chart-data', {
+        const response = await axios.get('https://task-submission-portal-p7li.onrender.com/get-bar-chart-data', {
           withCredentials: true,
           headers: {
             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ useEffect(() => {
       useEffect(() => {
         const fetchSubmittedTasks = async () => {
           try {
-            const response = await axios.get('http://localhost:3000/get-submitted-tasks', {
+            const response = await axios.get('https://task-submission-portal-p7li.onrender.com/get-submitted-tasks', {
               withCredentials: true,
               headers: {
                 'Content-Type': 'application/json',
@@ -105,7 +105,7 @@ useEffect(() => {
         };
       
         fetchSubmittedTasks(); 
-      }, []); // Empty dependency array ensures this effect runs only once on mount
+      }, []); 
       
       const hasTaskBeenSubmitted = (task) => {
         return submittedTasks.some((submittedTask) => submittedTask.Day === task.Day);
@@ -249,13 +249,12 @@ useEffect(() => {
     const options = {
       scales: {
         x: {
-          barPercentage: 0.8, // Adjust the width of the bars
-          categoryPercentage: 0.9, //
+          barPercentage: 0.8, 
+          categoryPercentage: 0.9, 
           grid: {
-            drawOnChartArea: false, // Ensure the grid is drawn outside the chart area
+            drawOnChartArea: false, 
             lineWidth: 1,
             color: (context) => {
-              // Draw grid lines at intervals of 2, 4, 6, ...
               const index = context.index;
               return index % 2 === 0 ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0)';
             },
@@ -268,7 +267,7 @@ useEffect(() => {
     const updateBarChart = (label, data) => {
       console.log(' bar chart with:', label, data);
     
-      // Extract the day number from the label (e.g., "Day 1" becomes "1")
+      // Extract the day number from the label
       const dayNumber = label.split(' ')[1];
       const currentDate = getCurrentDateTime().split(' ')[0]; // Extracting only the date
       
@@ -290,7 +289,6 @@ useEffect(() => {
         };
       });
     };
-    //////////////////////////////////////
     const [polarAreaChartData, setPolarAreaChartData] = useState({
       labels: [],
       datasets: [
@@ -330,7 +328,7 @@ useEffect(() => {
       let polarAreaChartInstance = null;
 
       if (polarAreaChartInstance) {
-        polarAreaChartInstance.destroy(); // Destroy previous chart instance
+        polarAreaChartInstance.destroy();
       }
 
       polarAreaChartInstance = new Chart(polarAreaChartContext, {
@@ -338,7 +336,6 @@ useEffect(() => {
         data: polarAreaChartData,
         options: {
           responsive: true,
-         /* maintainAspectRatio: false,*/
           scale: {
               ticks: {
                   beginAtZero: true
@@ -354,7 +351,6 @@ useEffect(() => {
       };
     }, [polarAreaChartData]);
     
-    /////////////////////////////////////
       //User can't enter website until login
     if(!user) {
       return <Navigate to="/login" replace={true}/>
@@ -409,7 +405,7 @@ useEffect(() => {
               try {
                 setIsLoading(true);
                 const response = await axios.post(
-                  'http://localhost:3000/submit-task',
+                  'https://task-submission-portal-p7li.onrender.com/submit-task',
                   newTask,
                   {
                     withCredentials: true,

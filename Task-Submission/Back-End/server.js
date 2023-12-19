@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const crypto = require('crypto');
 const bcrypt = require("bcrypt");
 const session = require("express-session");
-const MongoStore = require("connect-mongo"); 
+const MongoStore = require("connect-mongo"); // Import connect-mongo correctly
 const app = express();
 
 app.use(express.json());
@@ -24,7 +24,6 @@ app.use(
     saveUninitialized: true,
     store: MongoStore.create({
       mongooseConnection: mongoose.connection,
-      // Provide your MongoDB connection URL directly
       mongoUrl: "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/Task_Submission?retryWrites=true&w=majority",
     }),
   })
@@ -33,7 +32,7 @@ app.use(
 const PORT = 3000;
 const DB_URL = "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/Task_Submission?retryWrites=true&w=majority";
 
- 
+
   mongoose
   .connect(DB_URL, {
     useNewUrlParser: true,
