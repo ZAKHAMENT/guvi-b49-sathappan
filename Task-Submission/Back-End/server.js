@@ -1,3 +1,4 @@
+
 const express = require("express");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
@@ -10,14 +11,12 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const app = express();
-
 app.use(express.json());
 app.use(
   cors({
     
   })
 );
-
 app.use(
   session({
     secret: "123456789",
@@ -29,10 +28,8 @@ app.use(
     }),
   })
 );
-
 const PORT = 3000;
 const DB_URL = "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/Task_Submission?retryWrites=true&w=majority";
-
 
   mongoose
   .connect(DB_URL, {
@@ -44,7 +41,6 @@ const DB_URL = "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mon
     console.error("Could not connect to MongoDB", err);
     process.exit(1); // Exit the process if the connection fails
   });
-
 // Task Schema
 const taskSchema = new mongoose.Schema({
   Day: String,
@@ -95,20 +91,28 @@ const polarChartDataSchema = new mongoose.Schema({
     },
   ],
 });
-
 const PolarChartDataModel = mongoose.model("PolarChartData", polarChartDataSchema);
 const TaskModel = mongoose.model("Task", taskSchema);
 const UserModel = mongoose.model("User", userSchema);
 const BarChartDataModel = mongoose.model("BarChartData",barChartDataSchema);
-
 // Middleware to check if the user is authenticated
 const authenticateUser = (req, res, next) => {
-  if (!req.session.user) {
+  const token = req.headers.authorization.split(" ")[1];
+  console.log("auth token", token);
+  
+  if (!token) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
+  const decodedToken = jwt.verify(
+    token,
+    "123456789"
+ );
+ console.log("decided token" ,decodedToken)
+ req.user = {
+  username: decodedToken.username,
+  };
   next();
 };
-
 const updateBarChartOnServer = async (userId, dayNumber, currentDate) => {
   try {
     const filter = { user: userId };
@@ -126,7 +130,6 @@ const updateBarChartOnServer = async (userId, dayNumber, currentDate) => {
     console.error('Error updating bar chart data on the server:', error);
   }
 };
-
 const updatePolarChartOnServer = async (userId, dayNumber, currentDate) => {
   try {
     const filter = { user: userId };
@@ -144,25 +147,21 @@ const updatePolarChartOnServer = async (userId, dayNumber, currentDate) => {
     console.error('Error updating polar chart data on the server:', error);
   }
 };
-
 app.get('/get-polar-chart-data', authenticateUser, async (req, res) => {
   try {
     // Fetch and send the Polar Chart data for the authenticated user
     const userId = req.session.user._id;
     const polarChartData = await PolarChartDataModel.findOne({ user: userId });
-
     // If no data is found, send an empty response or handle it accordingly
     if (!polarChartData) {
       return res.status(200).json({ labels: [], datasets: [{ label: 'Task no:', data: [] }] });
     }
-
     res.status(200).json(polarChartData);
   } catch (error) {
     console.error('Error fetching polar chart data:', error);
     res.status(500).json({ error: 'An error occurred while fetching polar chart data.' });
   }
 });
-
 app.post('/submit-task', authenticateUser, async (req, res) => {
   console.log('User Session:', req.session.user);
   try {
@@ -171,7 +170,6 @@ app.post('/submit-task', authenticateUser, async (req, res) => {
     if (!req.session.user || !req.session.user.username) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
-
     // Check if the user has already submitted a task for the specified day
     const existingTask = await TaskModel.findOne({ Day, username: req.session.user.username });
     if (existingTask) {
@@ -185,7 +183,7 @@ app.post('/submit-task', authenticateUser, async (req, res) => {
       backEndCode,
       comments,
       submissionTime,
-      isSubmitted: true, // Update the isSubmitted field
+      isSubmitted: true,
     });
     await newTask.save();
     // Extract the day number from newTask.Day
@@ -205,12 +203,10 @@ app.post('/submit-task', authenticateUser, async (req, res) => {
     
     // Get the current date
     const currentDate = getCurrentDateTime().split(' ')[0];
-
     // Inside the submit-task route
 const userId = req.session.user._id;
 await updateBarChartOnServer(userId, dayNumber, currentDate);
 await updatePolarChartOnServer(userId, dayNumber, currentDate);
-
     try {
       res.status(201).json({ message: 'Task submitted successfully' });
     } catch (updateError) {
@@ -222,73 +218,61 @@ await updatePolarChartOnServer(userId, dayNumber, currentDate);
     res.status(500).json({ error: 'An error occurred while submitting the task.' });
   } 
 });
-
 app.get('/get-bar-chart-data', authenticateUser, async (req, res) => {
   try {
     // Fetch and send the bar chart data for the authenticated user
     const userId = req.session.user._id; 
     const barChartData = await BarChartDataModel.findOne({ user: userId });
-
     // If no data is found, send an empty response or handle it accordingly
     if (!barChartData) {
       return res.status(200).json({ labels: [], datasets: [{ label: 'Task no:', data: [] }] });
     }
-
     res.status(200).json(barChartData);
   } catch (error) {
     console.error('Error fetching bar chart data:', error);
     res.status(500).json({ error: 'An error occurred while fetching bar chart data.' });
   }
 });
-
-app.get('/get-submitted-tasks', async (req, res) => {
+app.get('/get-submitted-tasks', authenticateUser,async (req, res) => {
   try {
     // Check if the user is authenticated and the user object is present in the request
-    console.log('User Session:', req.session.user);
-    if (!req.session.user || !req.session.user.username) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-    const submittedTasks = await TaskModel.find({ username: req.session.user.username });
+   // console.log('User Session:', req.session.user);
+    // if (!req.session.user || !req.session.user.username) {
+    //   return res.status(401).json({ error: 'Unauthorized' });
+    //}
+    const submittedTasks = await TaskModel.find({ username: req.user.username });
     res.status(200).json(submittedTasks);
   } catch (error) {
     console.error('Error fetching submitted tasks:', error);
     res.status(500).json({ error: 'An error occurred while fetching submitted tasks.' });
   }
 });
-
 app.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
     // Check if the device is already registered
     const existingUserByDevice = await UserModel.findOne({ deviceRegistered: true });
     if (existingUserByDevice) {
       return res.status(400).json({ error: 'Device is already registered.' });
     }
-
     const existingUserByUsername = await UserModel.findOne({ username });
     const existingUserByEmail = await UserModel.findOne({ email });
-
     if (existingUserByUsername) {
       return res.status(400).json({ error: 'Username already exists.' });
     }
-
     if (existingUserByEmail) {
       return res.status(400).json({ error: 'Email is already registered.' });
     }
-
     // Set deviceRegistered to true during registration
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new UserModel({ username, email, password: hashedPassword, registered: true, deviceRegistered: true });
     await newUser.save();
     res.status(201).json({ message: 'User registered successfully' });
-
   } catch (error) {
     console.error('Error registering user:', error);
     res.status(500).json({ error: 'An error occurred while registering the user.' });
   }
 });
-
 app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -315,7 +299,6 @@ function generateToken(user) {
   });
   return token;
 }
-
 app.get('/get-submitted-task-days', authenticateUser, async (req, res) => {
   try {
     // Check if the user is authenticated and the user object is present in the request
@@ -329,15 +312,12 @@ app.get('/get-submitted-task-days', authenticateUser, async (req, res) => {
     res.status(500).json({ error: 'An error occurred while fetching submitted task days.' });
   }
 });
-
 app.get('/check-registration-status', (req, res) => {
   const registrationStatus = true;
   res.json({ registered: registrationStatus });
 });
-
 // _____________________________________Forgot password ______________________________________________
 const tokens = [];
-
 const emailTransporter = nodemailer.createTransport({
   service: 'gmail',
   host: 'smtp.example.email',
@@ -353,7 +333,6 @@ const emailTransporter = nodemailer.createTransport({
     rejectUnauthorized: true,
   },
 });
-
 // Send an email with the token link
 function sendEmail(email, token) {
   const resetLink = `http://localhost:5173/reset-password/${token}`; // Include the token in the link
@@ -363,7 +342,6 @@ function sendEmail(email, token) {
     subject: 'Password Reset',
     text: `Click the following link to reset your password: ${resetLink}`,
   };
-
   emailTransporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error(error);
@@ -372,7 +350,6 @@ function sendEmail(email, token) {
     }
   });
 }
-
 // Checking nodemailer
 emailTransporter.verify(function (error, success) {
   if (error) {
@@ -381,22 +358,17 @@ emailTransporter.verify(function (error, success) {
     console.log('Server is ready to take our messages');
   }
 });
-
 // Generate a random token securely using crypto
 function generateTokens(length) {
   return crypto.randomBytes(length).toString('hex');
 }
-
 app.post('/api/forgot-password', async (req, res) => {
   const { email } = req.body;
-
   try {
     // Check if the email exists in the database
     const user = await UserModel.findOne({ email });
-
     const token = generateTokens(32); // Generate a 32-character token securely
     tokens.push({ email, token });
-
     // Send the token in the response, you can send it via email in a real application
     sendEmail(email, token);
     res.json({ message: 'Password reset token generated', token });
@@ -405,64 +377,50 @@ app.post('/api/forgot-password', async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
 // Endpoint to reset password
 app.post('/api/reset-password/:token', async (req, res) => {
   const { token, newPassword } = req.body;
-
   try {
     // Find the token in the tokens array
     const storedToken = tokens.find((t) => t.token === token);
-
     if (!storedToken) {
       return res.status(400).json({ message: 'Invalid token' });
     }
-
     // Update the user's password in the database
     const user = await UserModel.findOne({ email: storedToken.email });
-
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
-
     // Replace 'password' with the hashed and salted newPassword
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
     await user.save(); // Save the updated user to the database
-
     // Remove the used token
     const index = tokens.indexOf(storedToken);
     tokens.splice(index, 1);
-
     res.json({ message: 'Password reset successfully' });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
 app.post('/api/enter-email', async (req, res) => {
   const { email } = req.body;
-
   try {
     // Check if the email already exists in the database
     const existingEmail = await UserModel.findOne({ email });
-
     if (existingEmail) {
       return res.status(400).json({ message: 'Email already exists' });
     }
-
     // Create a new email document in the database
     const newEmail = new UserModel({ email });
     await newEmail.save();
-
     res.json({ message: 'Email saved to the database' });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
 app.listen(PORT, () => {
   console.log("Server is running on PORT", PORT);
 });
