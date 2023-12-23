@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
@@ -10,11 +9,11 @@ const crypto = require('crypto');
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const { type } = require("os");
 const app = express();
 app.use(express.json());
 app.use(
   cors({
-    
   })
 );
 app.use(
@@ -39,7 +38,7 @@ const DB_URL = "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mon
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => {
     console.error("Could not connect to MongoDB", err);
-    process.exit(1); // Exit the process if the connection fails
+    process.exit(1); 
   });
 // Task Schema
 const taskSchema = new mongoose.Schema({
@@ -107,10 +106,10 @@ const authenticateUser = (req, res, next) => {
     token,
     "123456789"
  );
- console.log("decided token" ,decodedToken)
+ console.log("decided token" ,decodedToken);
  req.user = {
   username: decodedToken.username,
-  };
+  }
   next();
 };
 const updateBarChartOnServer = async (userId, dayNumber, currentDate) => {
@@ -131,6 +130,7 @@ const updateBarChartOnServer = async (userId, dayNumber, currentDate) => {
   }
 };
 const updatePolarChartOnServer = async (userId, dayNumber, currentDate) => {
+  console.log('updatePolarChartOnServer called with userId:', userId, 'dayNumber:', dayNumber, 'currentDate:', currentDate);
   try {
     const filter = { user: userId };
     const update = {
@@ -147,38 +147,24 @@ const updatePolarChartOnServer = async (userId, dayNumber, currentDate) => {
     console.error('Error updating polar chart data on the server:', error);
   }
 };
-app.get('/get-polar-chart-data', authenticateUser, async (req, res) => {
-  try {
-    // Fetch and send the Polar Chart data for the authenticated user
-    const userId = req.session.user._id;
-    const polarChartData = await PolarChartDataModel.findOne({ user: userId });
-    // If no data is found, send an empty response or handle it accordingly
-    if (!polarChartData) {
-      return res.status(200).json({ labels: [], datasets: [{ label: 'Task no:', data: [] }] });
-    }
-    res.status(200).json(polarChartData);
-  } catch (error) {
-    console.error('Error fetching polar chart data:', error);
-    res.status(500).json({ error: 'An error occurred while fetching polar chart data.' });
-  }
-});
+
 app.post('/submit-task', authenticateUser, async (req, res) => {
-  console.log('User Session:', req.session.user);
+  console.log('User Session:', req.user.username);
   try {
     const { Day, frontEndCode, backEndCode, comments, submissionTime } = req.body;
     // Check if the user is authenticated
-    if (!req.session.user || !req.session.user.username) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
+    // if ( !req.user.username) {
+    //   return res.status(401).json({ error: 'Unauthorized' });
+    // }
     // Check if the user has already submitted a task for the specified day
-    const existingTask = await TaskModel.findOne({ Day, username: req.session.user.username });
+    const existingTask = await TaskModel.findOne({ Day, username: req.user.username });
     if (existingTask) {
       return res.status(400).json({ error: 'You have already submitted a task for this day.' });
     }
     // Set the username from the authenticated user
     const newTask = new TaskModel({
       Day,
-      username: req.session.user.username,
+      username: req.user.username,
       frontEndCode,
       backEndCode,
       comments,
@@ -197,14 +183,12 @@ app.post('/submit-task', authenticateUser, async (req, res) => {
       const hours = String(now.getHours()).padStart(2, '0');
       const minutes = String(now.getMinutes()).padStart(2, '0');
       const seconds = String(now.getSeconds()).padStart(2, '0');
-    
       return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
     };
-    
     // Get the current date
     const currentDate = getCurrentDateTime().split(' ')[0];
     // Inside the submit-task route
-const userId = req.session.user._id;
+ const userId = req.session.user._id;
 await updateBarChartOnServer(userId, dayNumber, currentDate);
 await updatePolarChartOnServer(userId, dayNumber, currentDate);
     try {
@@ -221,7 +205,7 @@ await updatePolarChartOnServer(userId, dayNumber, currentDate);
 app.get('/get-bar-chart-data', authenticateUser, async (req, res) => {
   try {
     // Fetch and send the bar chart data for the authenticated user
-    const userId = req.session.user._id; 
+    const userId = req.session.user._id ; 
     const barChartData = await BarChartDataModel.findOne({ user: userId });
     // If no data is found, send an empty response or handle it accordingly
     if (!barChartData) {
@@ -231,6 +215,22 @@ app.get('/get-bar-chart-data', authenticateUser, async (req, res) => {
   } catch (error) {
     console.error('Error fetching bar chart data:', error);
     res.status(500).json({ error: 'An error occurred while fetching bar chart data.' });
+  }
+});
+
+app.get('/get-polar-chart-data', authenticateUser, async (req, res) => {
+  try {
+    // Fetch and send the Polar Chart data for the authenticated user
+    const userId = req.session.user._id ;
+    const polarChartData = await PolarChartDataModel.findOne({ user: userId });
+    // If no data is found, send an empty response or handle it accordingly
+    if (!polarChartData) {
+      return res.status(200).json({ labels: [], datasets: [{ label: 'Task no:', data: [] }] });
+    }
+    res.status(200).json(polarChartData);
+  } catch (error) {
+    console.error('Error fetching polar chart data:', error);
+    res.status(500).json({ error: 'An error occurred while fetching polar chart data.' });
   }
 });
 app.get('/get-submitted-tasks', authenticateUser,async (req, res) => {
@@ -301,11 +301,7 @@ function generateToken(user) {
 }
 app.get('/get-submitted-task-days', authenticateUser, async (req, res) => {
   try {
-    // Check if the user is authenticated and the user object is present in the request
-    if (!req.session.user || !req.session.user.username) {
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-    const submittedTaskDays = await TaskModel.find({ username: req.session.user.username }).distinct('Day');
+    const submittedTaskDays = await TaskModel.find({ username: req.user.username }).distinct('Day');
     res.status(200).json(submittedTaskDays);
   } catch (error) {
     console.error('Error fetching submitted task days:', error);
