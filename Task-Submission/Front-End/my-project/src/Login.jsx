@@ -18,10 +18,8 @@ function Login() {
     try {
       const response = await axios.post(
         'https://task-portal.onrender.com/login',
-        {username:email,password},
-        {
-          withCredentials: true,
-        }
+        {username:email,password}
+    
       );
   
       if (response.status === 200) {
