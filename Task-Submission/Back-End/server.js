@@ -13,7 +13,9 @@ const { type } = require("os");
 const app = express();
 app.use(express.json());
 app.use(
-  cors({
+   cors({
+    origin: 'https://6587ce78bd2a380552df0f82--dashing-shortbread-999330.netlify.app',
+    credentials: true,
   })
 );
 app.use(
