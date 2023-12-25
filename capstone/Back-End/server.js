@@ -12,10 +12,10 @@ const MongoStore = require("connect-mongo");
 const { type } = require("os");
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-  })
-);
+app.use(cors({
+  origin: 'https://65892c6438826aba2c269a19--dashing-shortbread-999330.netlify.app',
+  credentials: true, // Enable credentials (cookies, authorization headers, etc.)
+}));
 app.use(
   session({
     secret: "123456789",
