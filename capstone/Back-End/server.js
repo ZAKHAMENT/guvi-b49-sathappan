@@ -13,7 +13,7 @@ const { type } = require("os");
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'https://65893980bd2a38c421df1078--dashing-shortbread-999330.netlify.app',
+  origin: 'https://65893b6b2473ebc1ea87ebda--dashing-shortbread-999330.netlify.app',
   credentials: true, // Enable credentials (cookies, authorization headers, etc.)
 }));
 app.use(
