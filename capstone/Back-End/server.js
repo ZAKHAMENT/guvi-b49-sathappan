@@ -13,9 +13,9 @@ const { type } = require("os");
 const app = express();
   app.use(express.json());
   app.use(cors(
-   // origin: 'http://localhost:5173', 
-   // methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    //credentials: true,
+  origin: 'https://658fc3825225743d464b025d--dashing-shortbread-999330.netlify.app', 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
   ));
   app.use(
     session({
