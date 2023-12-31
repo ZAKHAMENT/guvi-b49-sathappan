@@ -15,7 +15,7 @@ function RegisterForm() {
   const [isRegistered, setIsRegistered] = useState(false);
 
   const isStrongPassword = (password) => {
-    // Define your password strength criteria here
+    // User should use strong password
     const minLength = 8;
     const hasUppercase = /[A-Z]/.test(password);
     const hasLowercase = /[a-z]/.test(password);
@@ -91,7 +91,7 @@ function RegisterForm() {
   const handleAlreadyHaveAccountClick = async () => {
     setIsLoading(true);
 
-    // Simulate loading for 3 seconds (replace with your logic)
+    // Simulate loading for 3 seconds
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     setIsLoading(false);
