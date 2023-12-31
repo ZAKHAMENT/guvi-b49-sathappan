@@ -1,8 +1,4 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Register Form : While registering please enter a strong password.
+Login Form : If you can't login the website please refreh the webpage and try again because due to the netlify issuees.
+In submitting the form field enter an valid url then only form get submitted.
+Tasklist.jsx has the major amount of code in this project.
