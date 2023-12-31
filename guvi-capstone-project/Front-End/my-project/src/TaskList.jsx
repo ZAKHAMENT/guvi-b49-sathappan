@@ -8,7 +8,6 @@ import Login from './Login';
 import RegisterForm from './RegisterForm';
 import { Bar} from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
-//https://658fd7e94abcd64acfff6e40--dashing-shortbread-999330.netlify.app
   function TaskList() {
     const [showForm, setShowForm] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -18,13 +17,13 @@ import Chart from 'chart.js/auto';
     const [showSuccessCard, setShowSuccessCard] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [selectedDayText, setSelectedDayText] = useState("");
-    const [isLoadingLogout, setIsLoadingLogout] = useState(false); // State to control the loading screen for logout
+    const [isLoadingLogout, setIsLoadingLogout] = useState(false);
     const [user, setUser] = useState('sathappan');
     const [submittedTaskIds, setSubmittedTaskIds] = useState([]);
     const [errorState, setErrorState] = useState('');
     const navigate = useNavigate();
     const barChartRef = useRef();
-    /////
+    
     const [polarAreaChartData, setPolarAreaChartData] = useState({
       labels: [],
       datasets: [
@@ -83,8 +82,8 @@ import Chart from 'chart.js/auto';
         }
       };
     }, [polarAreaChartData]);
-    //////////////////
-    //Polar
+    
+    //Polar chart
 useEffect(() => {
   const fetchData = async () => {
     try {
@@ -420,6 +419,7 @@ useEffect(() => {
         formContainer.scrollIntoView({ behavior: "smooth" });
       }
     };
+    
     // Scroll to polarchart when button get clicked
     const handleScrollToPolarChart = () => {
       const polarChartContainer = document.getElementById("polarHead");
@@ -449,7 +449,7 @@ useEffect(() => {
       setSearchTerm(e.target.value);
     };
            
-            // Current date and time
+            // Getting current date and time
             const getCurrentDateTime = () => {
               const now = new Date();
               const date = now.toLocaleDateString();
@@ -461,6 +461,7 @@ useEffect(() => {
     const isValidUrl = (url) => {
       return url.startsWith('http://') || url.startsWith('https://');
     };
+    
     // Function to handle form submission
     const handleSubmit = async (e) => {
       // Update the submitted task dates
