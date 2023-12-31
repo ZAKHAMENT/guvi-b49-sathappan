@@ -5,7 +5,7 @@ import './PasswordReset.css';
 
 function PasswordReset() {
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // State to track loading
+  const [isLoading, setIsLoading] = useState(false);
   const { token } = useParams();
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ function PasswordReset() {
     e.preventDefault();
 
     try {
-      setIsLoading(true); // Set loading to true when submitting
+      setIsLoading(true);
 
       const response = await axios.post(`https://task-submission-d4k5.onrender.com/api/reset-password/${token}`, {
         token: token,
@@ -35,7 +35,7 @@ function PasswordReset() {
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      setIsLoading(false); // Reset loading state after the operation is complete
+      setIsLoading(false); 
     }
   };
 
