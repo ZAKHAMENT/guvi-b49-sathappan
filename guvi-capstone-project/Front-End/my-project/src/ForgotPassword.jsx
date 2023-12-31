@@ -12,8 +12,6 @@ function ForgotPassword() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Set loading to true when the form is submitted
     setLoading(true);
 
     try {
@@ -33,7 +31,6 @@ function ForgotPassword() {
     } catch (error) {
       console.error('Error:', error);
     } finally {
-      // Set loading back to false after the API call is complete
       setLoading(false);
     }
   };
