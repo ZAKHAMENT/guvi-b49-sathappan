@@ -7,7 +7,7 @@ function LandingPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Make a GET request to your server to check the user's registration status
+    // Making a GET request to your server to check the user's registration status
     axios.get('https://task-submission-d4k5.onrender.com/check-registration-status') 
       .then((response) => {
         // server responds with registration status
