@@ -1,0 +1,164 @@
+body{
+    background-color:#FFE4E1;
+  }
+  
+  header{
+    font-family:Roboto;
+    font-size:26px;
+    color:black;
+    font-weight:bold;
+    text-align:center;
+    margin-top:20px;
+    margin-bottom:20px;
+  }
+  
+  #survey-form{
+    background-color:#FFFFFF;
+    font-family:Quicksand;
+    max-width:70%;
+    margin:auto;
+    padding:0;
+    border-radius:15px;
+  }
+  
+  #description{
+    text-align:center;
+    font-size:16px;
+    padding-top:17px;
+    font-weight:bold;
+  }
+  
+  .fieldset{
+    border-width:0;
+    padding-top:1%;
+  
+  }
+  
+  .sub-group{
+    position:relative;
+    right:30px;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:1%;
+  }
+  
+  label.left{
+    width:30%;
+    padding-right:4%;
+    text-align:right;
+  }
+  
+  
+  .right{
+    width:30%;
+  }
+  
+  .input-field{
+    height:20px;
+    padding:5px;
+    border: 1px solid #c0c0c0;
+    border-radius: 2px;
+  }
+  
+  #dropdown{
+    font-family:Quicksand;
+    height:30px;
+    border: 1px solid #c0c0c0;
+    border-radius: 2px;
+  }
+  
+  .checkbox{
+    position:relative;
+    padding:3px;
+    right:3px;
+    bottom:15px;
+  }
+  
+  .radio{
+    position:relative;
+    padding:3px;
+    bottom:15px;
+  }
+  
+  h2{
+    position:relative;
+    bottom:8px;
+    font-size:16px;
+    text-align:center;
+    font-weight:bold;
+  }
+  
+  .commentbox{
+    text-align:center;
+  }
+  
+  textarea{
+    width:65%;
+    border-radius:4px;
+  }
+  
+  #submit{
+    /* background:#FFE4E1;
+    font-family:Roboto;
+    border-radius:4px;
+    font-size:23px; */
+
+    display: inline-block;
+    font-family:Roboto;
+    padding: 10px 20px;
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #ff5252;
+    border: 2px solid #000;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px #000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  #submit:hover {
+    background-color: #fff;
+    color: #ff5252;
+    border: 2px solid #ff5252;
+    box-shadow: 5px 5px 0px #ff5252;
+  }
+  
+  #submit:active {
+    background-color: #fcf414;
+    box-shadow: none;
+    transform: translateY(4px);
+  }
+  
+  label:hover{
+    cursor:pointer;
+  }
+  
+  @media (max-width: 800px) {
+    body {
+      font-size: 12px;
+    }
+  }
+  
+  @media (max-width: 580px) {
+    body {
+      font-size: 9px;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    /* Adjust layout for screens wider than 600px */
+    #survey-form {
+      width: 60%;
+    }
+  }
+  
+  @media screen and (min-width: 900px) {
+    /* Adjust layout for screens wider than 900px */
+    #survey-form {
+      width: 50%;
+    }
+  }
