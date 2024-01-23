@@ -1,8 +1,9 @@
-1.) HTTP 1.1 VS HTTP 2
-
+01.) Blog: Difference between HTTP/1.1 and HTTP/2
 HTTP 1.1 :-
 
-                      HTTP/1.1 has been the dominant protocol for web communications for over two decades. It laid the foundation for the modern web and enabled the seamless exchange of hypertext documents between clients (web browsers) and servers.
+        HTTP/1.1 has been the dominant protocol for web communications for over two decades.
+        It laid the foundation for the modern web and enabled the seamless exchange of hypertext
+        documents between clients (web browsers) and servers.
 
 Ther are some important things HTTP 1.1 can do 
 1.Request/Response Model
@@ -11,24 +12,86 @@ Ther are some important things HTTP 1.1 can do
 
 HTTP 2 :-
 
-                   HTTP 2, the successor to HTTP/1.1, addresses the limitations of its predecessor while maintaining compatibility with existing web infrastructure. It introduces several key features that significantly improve web performance and efficiency.
+        HTTP 2, the successor to HTTP/1.1, addresses the limitations of its predecessor while
+maintaining compatibility with existing web infrastructure. It introduces several key features
+that significantly improve web performance and efficiency.
 
  There are some important thing HTTP 2 can do
 1. Multiplexing 
 2. Compression 
 3. Server push
 4. Dependency 
------------------------------------------------------------------
 
-2.) Write a blog about objects and it's internal representation in javascript 
+Conclusion:-
+In conclusion, HTTP/2 brings substantial improvements over HTTP/1.1 in terms of speed, efficiency,
+and performance, making it a preferred choice for modern web development.
+
+----------------------------------------------------------------------------------------------------------------------------
+
+02.) Blog: Objects and Internal Representation in JavaScript
 
 1. Objects in JavaScript:-
  
-In JavaScript, objects are dynamic, mutable data structures that store collections of key-value pairs, called properties. These properties can be of various data types, including primitive values, other objects, or even functions. Objects serve as the foundation for many fundamental concepts in JavaScript, such as prototypes, inheritance, and encapsulation.
+In JavaScript, objects are dynamic, mutable data structures that store collections of key-value pairs,
+called properties. These properties can be of various data types, including primitive values, other
+objects, or even functions. Objects serve as the foundation for many fundamental concepts in JavaScript,
+such as prototypes, inheritance, and encapsulation.
 
 2. Internal representation of object :-
 
-Under the hood, JavaScript uses a mechanism called a hash table (or hash map) to implement objects efficiently. This data structure allows for fast insertion, deletion, and retrieval of key-value pairs. Each object is associated with a unique hash code, which is used as an index in the hash table to store and retrieve its properties. The hash code is calculated based on the object's properties and their values, ensuring uniqueness and efficient access.
+Under the hood, JavaScript uses a mechanism called a hash table (or hash map) to implement objects
+efficiently. This data structure allows for fast insertion, deletion, and retrieval of key-value
+pairs. Each object is associated with a unique hash code, which is used as an index in the hash
+table to store and retrieve its properties. The hash code is calculated based on the object's
+properties and their values, ensuring uniqueness and efficient access.
 
+Internal Representation: JavaScript engines use various techniques to represent objects efficiently.
 
------------------------------------------------------------------
+Properties and Methods:
+
+Properties: Key-value pairs representing the state of the object.
+Methods: Functions associated with the object.
+Prototype Chain:
+
+Objects in JavaScript are linked to a prototype object, forming a chain.
+If a property or method is not found in an object, the engine looks up the prototype chain until it reaches the end.
+Memory Allocation:
+
+Objects are allocated memory dynamically to accommodate their properties and methods.
+Memory is managed using garbage collection, ensuring efficient use of resources.
+
+------------------------------------------Kindly Ignore if its not required------------------------------------------------------
+
+03.) Understanding IP Address, Port, HTTP Methods, and MAC Address
+
+IP Address:
+An IP (Internet Protocol) address is a numerical label assigned to each device connected to a computer network.
+It serves two main purposes: host or network interface identification and location addressing.
+IP addresses are categorized into IPv4 (32-bit) and IPv6 (128-bit) formats.
+
+Port:
+Ports are used to uniquely identify different services on the same IP address.
+Ports are divided into well-known ports (0-1023), registered ports (1024-49151), and dynamic or private ports (49152-65535).
+HTTP Methods:
+HTTP (Hypertext Transfer Protocol) methods define the actions that can be performed on resources.
+Common methods include GET (retrieve data), POST (submit data), PUT (update data), DELETE (remove data), etc.
+Each method has a specific purpose in the client-server communication model.
+
+MAC Address:
+A MAC (Media Access Control) address is a unique identifier assigned to a network interface for communication on the physical network segment.
+MAC addresses are assigned by manufacturers and are hard-coded into the network interface.
+
+Key Concepts:
+HTTP Methods:
+GET: Retrieve data from the server.
+POST: Submit data to be processed to a specified resource.
+PUT: Update a resource or create a new resource if it doesn't exist.
+DELETE: Remove a resource.
+
+Common Ports:
+80: HTTP
+443: HTTPS
+21: FTP
+22: SSH
+IPv4 Address Format: 192.168.0.1
+IPv6 Address Format: 2001:0db8:85a
