@@ -2,11 +2,11 @@ import { useState } from 'react';
 
 const ShoppingCart = () => {
     const [products, setProducts] = useState([
-      { id: 1, name: 'Bathing Soap', price: '-/45', image: '/image/bath-soap-500x500.jpg', description: 'This mild bathing soap bar contains 100% more glycerine soaps making it an excellent choice for achieving visibly glowing skin.', inCart: false },
-      { id: 2, name: 'Mango Juice', price: '-/95', image: '/image/mango-juice-slice-isolated-on-260nw-1095021272.webp', description: 'Low sugar mango juice and if you drink you get more energy. It good for health and you can use it for party purposes. Go for it!', inCart: false },
-      { id: 3, name: 'Tooth Paste', price: '-/30', image: '/image/vector-isolated-object-illustration-oral-dental-care-toothbrush-toothpaste_311865-9441.jpg', description: 'Recommended Usage: Put a pea size amount of our Colgate toothpaste on the head of the toothbrush. It has solid brisiles to clean', inCart: false },
-      { id: 4, name: 'Hair Oil', price: '-/280', image: '/image/composition-natural-organic-coconut-oil-600nw-1421356181.webp', description: 'You can apply it directly to your scalp as it comes with bottle. The ingredients are infused to make an ayurvedic concoction that allow healthy hair growth.', inCart: false },
-      { id: 5, name: 'Cookies', price: '-/360', image: '/image/delicious-cookies-arrangement_23-2150707201.jpg', description: 'These biscuits do not contain maida and are made from Aashirvaad atta and they also have No Cholesterol and No Trans-fat and goo to eat', inCart: false },
+      { id: 1, name: 'Bathing Soap', price: '-/45', image: 'https://i.pinimg.com/736x/65/f9/f2/65f9f2a3c924209c97c6fbe086d6c6a4.jpg', description: 'This mild bathing soap bar contains 100% more glycerine soaps making it an excellent choice for achieving visibly glowing skin.', inCart: false },
+      { id: 2, name: 'Mango Juice', price: '-/95', image: 'https://i.pinimg.com/736x/01/06/7d/01067dfc4831c369b7f5719071c1a4a8.jpg', description: 'Low sugar mango juice and if you drink you get more energy. It good for health and you can use it for party purposes. Go for it!', inCart: false },
+      { id: 3, name: 'Tooth Paste', price: '-/30', image: 'https://i.pinimg.com/736x/13/0f/a1/130fa11176c5d790fcf347a3c1db8421.jpg', description: 'Recommended Usage: Put a pea size amount of our Colgate toothpaste on the head of the toothbrush. It has solid brisiles to clean', inCart: false },
+      { id: 4, name: 'Hair Oil', price: '-/280', image: 'https://i.pinimg.com/736x/d3/d8/a2/d3d8a2ce15eb13f60fadb98c39bc2bb1.jpg', description: 'You can apply it directly to your scalp as it comes with bottle. The ingredients are make an ayurvedic that allow healthy hair growth.', inCart: false },
+      { id: 5, name: 'Cookies', price: '-/360', image: 'https://i.pinimg.com/736x/3a/ad/d4/3aadd4e7760b812e6789c859978745a8.jpg', description: 'These biscuits do not contain maida and are made from atta and they also have No Cholesterol and No Trans-fat and goo to eat', inCart: false },
     ]);
   
     const [cartCount, setCartCount] = useState(0);
@@ -43,7 +43,7 @@ const ShoppingCart = () => {
   <path d="M20 20a1 1 0 1 0 0 2 1 1 0 1 0 0-2z" />
   <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
 </svg>
-            <p>Cart Quantity: {cartCount}</p>
+            <p>Cart Quantity : <strong className='cartCount'>{cartCount}</strong></p>
           </div>
           <div className='main-content'>
             <h3>Available Products:</h3>
@@ -65,11 +65,7 @@ const ShoppingCart = () => {
               ))}
             </ul>
           </div>
-          
         </div>
       );
     };
-    
-  
   export default ShoppingCart;
-  
