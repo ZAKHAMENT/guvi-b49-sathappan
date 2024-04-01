@@ -41,8 +41,6 @@
   color: #888;
 }
 
-
-/* ShoppingCart.css */
 .cartCount{
   color: whitesmoke;
 }
@@ -75,8 +73,7 @@ ul {
 li {
   margin-bottom: 20px;
   padding: 10px;
-  /* background-color: #fff; */
-  color: #fff; /* Set text color to white */
+  color: #fff; 
   background:  #333333;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
@@ -84,7 +81,7 @@ li {
 
 .product-list li {
   margin-bottom: 20px;
-  max-width: 900px; /* Adjust the max-width based on your preference */
+  max-width: 900px;
 }
 .white {
   color: white;
@@ -116,8 +113,8 @@ button:hover {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #fff; /* Optional: Add background color */
-  padding: 10px; /* Optional: Add padding for better visibility */
+  background-color: #fff; 
+  padding: 0px; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
   background: linear-gradient(to right,rgb(137, 104, 255),rgb(175, 152, 255));
 }
@@ -126,9 +123,9 @@ button:hover {
 }
 
 .main-content {
-  margin-top: 60px; /* Adjust the margin-top based on the height of .head-letters */
+  margin-top: 60px; 
 }
-/* Responsive styles */
+
 @media screen and (max-width: 600px) {
   li {
     font-size: 14px;
@@ -140,19 +137,6 @@ button:hover {
     font-size: 12px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .shopping-cart-container {
   display: flex;
@@ -199,6 +183,27 @@ button:hover {
   background-color: #2980b9;
 }
 
+
 #rand {
   margin-bottom: 10px;
+}
+
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
