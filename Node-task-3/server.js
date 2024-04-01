@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 
 const PORT = 3000;
- const DB_URL = const DB_URL = "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/Mentor_Student_Assigning?retryWrites=true&w=majority";
+const DB_URL ="mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/Mentor_Student_Assigning?retryWrites=true&w=majority";
 
 
 //name
