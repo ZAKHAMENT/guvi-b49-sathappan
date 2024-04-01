@@ -9,18 +9,16 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// const PORT = process.env.PORT;
-// const DB_URL = process.env.DB_URL;
-
 const PORT = 3000;
  const DB_URL = "mongodb://0.0.0.0:27017/Day3-task";
-//const DB_URL = "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/?retryWrites=true&w=majority";
 
-
+//name
 mongoose
   .connect(DB_URL, {})
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.log("Could not connect to MongoDB", err));
+
+// 1. API to create Mentor.
 
 app.post("/mentor", async (req, res) => {
   try {
@@ -32,6 +30,8 @@ app.post("/mentor", async (req, res) => {
   }
 });
 
+// 2. API to create Student
+
 app.post("/student", async (req, res) => {
   try {
     const student = new Student(req.body);
@@ -42,26 +42,48 @@ app.post("/student", async (req, res) => {
   }
 });
 
+// 3. API to Assign a student to Mentor - Select one mentor and Add multiple Student 
+
 app.post("/mentor/:mentorId/assign", async (req, res) => {
   try {
     const mentor = await Mentor.findById(req.params.mentorId);
-    const students = await Student.find({ _id: { $in: req.body.students } });
+    
+    // Find unassigned students
+    const unassignedStudents = await Student.find({ cMentor: null, _id: { $in: req.body.students } });
 
-    students.forEach((student) => {
+    // Check if all students are unassigned
+    if (unassignedStudents.length !== req.body.students.length) {
+      return res.status(400).send("Some or all students are already assigned to a mentor.");
+    }
+
+    // Assign mentor to unassigned students concurrently
+    await Promise.all(unassignedStudents.map(async (student) => {
       student.cMentor = mentor._id;
-      student.save();
-    });
+      await student.save();
+    }));
 
-    mentor.students = [
-      ...mentor.students,
-      ...students.map((student) => student._id),
-    ];
-    await mentor.save();
+    // Update mentor's students list without duplicates
+    await Mentor.findByIdAndUpdate(req.params.mentorId, {
+      $addToSet: { students: { $each: unassignedStudents.map((student) => student._id) } }
+    });
     res.send(mentor);
   } catch (error) {
     res.status(400).send(error);
   }
 });
+
+// 3.2 A student who has a mentor should not be shown in List
+
+app.get("/students/unassigned", async (req, res) => {
+  try {
+    const unassignedStudents = await Student.find({ cMentor: null });
+    res.send(unassignedStudents);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+//4. API to Assign or Change Mentor for particular Student
 
 app.put("/student/:studentId/assignMentor/:mentorId", async (req, res) => {
   try {
@@ -80,6 +102,8 @@ app.put("/student/:studentId/assignMentor/:mentorId", async (req, res) => {
   }
 });
 
+// 5. API to show all students for a particular mentor 
+
 app.get("/mentor/:mentorId/students", async (req, res) => {
   try {
     const mentor = await Mentor.findById(req.params.mentorId).populate(
@@ -91,6 +115,7 @@ app.get("/mentor/:mentorId/students", async (req, res) => {
   }
 });
 
+// 6. API to show the previously assigned mentor for a particular student 
 
 app.get("/student/:studentId/previousMentor", async (req, res) => {
     try {
