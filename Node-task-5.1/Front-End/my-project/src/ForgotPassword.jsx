@@ -16,7 +16,7 @@ function ForgotPassword() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/api/forgot-password', {
+      const response = await axios.get(`https://guvi-b49-sathappan-1.onrender.com/api/verify-token/${token}`);
         withCredentials: true,
         email: email,
         headers: {
