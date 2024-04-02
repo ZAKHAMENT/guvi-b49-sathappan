@@ -18,7 +18,7 @@ function PasswordReset() {
 
   const verifyToken = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/api/verify-token/${token}`);
+      const response = await axios.get(`https://guvi-b49-sathappan-1.onrender.com/api/verify-token/${token}`);
       if (response.data.message !== 'Token is valid') {
         toast.error('Invalid or expired token');
         navigate('/reset-password'); // Use navigate to redirect
@@ -39,7 +39,7 @@ function PasswordReset() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`http://localhost:3000/api/reset-password/${token}`, {
+      const response = await axios.post(`https://guvi-b49-sathappan-1.onrender.com/api/reset-password/${token}`, {
         token: token,
         newPassword: password,
       });
