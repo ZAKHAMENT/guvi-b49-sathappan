@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 app.use(cors({
-  origin: 'https://660c04247ac3a61b9a46716d--effulgent-panda-0eb781.netlify.app', 
+  origin: 'https://660cf6342ee03c8ad9971e01--effulgent-panda-0eb781.netlify.app', 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
@@ -103,7 +103,7 @@ const emailTransporter = nodemailer.createTransport({
 
 // Send an email with the token link
 async function sendEmail(email, token) {
-  const resetLink = `https://660c04247ac3a61b9a46716d--effulgent-panda-0eb781.netlify.app/reset-password/${token}`; 
+  const resetLink = `https://660cf6342ee03c8ad9971e01--effulgent-panda-0eb781.netlify.app/reset-password/${token}`; 
   const mailOptions = {
     from: 'kdsomewhatelse@gmail.com',
     to: email,
