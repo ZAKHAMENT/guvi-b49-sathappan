@@ -103,7 +103,7 @@ const emailTransporter = nodemailer.createTransport({
 
 // Send an email with the token link
 async function sendEmail(email, token) {
-  const resetLink = `https://660d01c77697269c4d3c9345--effulgent-panda-0eb781.netlify.app//reset-password/${token}`; 
+  const resetLink = `https://660d01c77697269c4d3c9345--effulgent-panda-0eb781.netlify.app/reset-password/${token}`; 
   const mailOptions = {
     from: 'kdsomewhatelse@gmail.com',
     to: email,
