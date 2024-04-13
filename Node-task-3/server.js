@@ -78,6 +78,11 @@ app.post("/mentor/:mentorId/assign", async (req, res) => {
 app.get("/students/unassigned", async (req, res) => {
   try {
     const unassignedStudents = await Student.find({ cMentor: null });
+
+    if (unassignedStudents.length === 0) {
+      return res.status(404).send("No unassigned students found. All students have mentors assigned.");
+    }
+
     res.send(unassignedStudents);
   } catch (error) {
     res.status(400).send(error);
