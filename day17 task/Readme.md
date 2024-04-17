@@ -1,0 +1,1 @@
+* In script.js replace the variable name key to your openweather api key (line no.06)
