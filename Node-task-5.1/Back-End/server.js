@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 app.use(cors({
-  origin: 'http://localhost:5173', 
+  origin: 'https://6620cbd8699249a232dc7120--effulgent-panda-0eb781.netlify.app', 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
