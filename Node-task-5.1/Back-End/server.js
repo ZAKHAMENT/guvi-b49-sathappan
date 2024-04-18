@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 app.use(cors({
-  origin: 'https://660d0a79cab358a348c100f9--effulgent-panda-0eb781.netlify.app', 
+  origin: 'http://localhost:5173', 
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
@@ -23,9 +23,9 @@ mongoose
   .catch((err) => console.log('Could not connect to MongoDB', err));
 
 // Models 
-
 const Email = require('./models/emailModel');
 const Token = require('./models/tokenEmailModel');
+
 // Api to enter email
 app.post('/api/enter-email', async (req, res) => {
   const { email } = req.body;
@@ -103,7 +103,7 @@ const emailTransporter = nodemailer.createTransport({
 
 // Send an email with the token link
 async function sendEmail(email, token) {
-  const resetLink = `https://660d0a79cab358a348c100f9--effulgent-panda-0eb781.netlify.app/reset-password/${token}`; 
+  const resetLink = `http://localhost:5173/reset-password/${token}`; 
   const mailOptions = {
     from: 'kdsomewhatelse@gmail.com',
     to: email,
@@ -217,6 +217,6 @@ app.get('/api/verify-token/:token', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(PORT,() => {
+  console.log(`Server is running on port: ${PORT}`)
 });
