@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './PasswordReset.css';
 import './App.css';
-import { useParams, useNavigate } from 'react-router-dom'; // Changed import from useHistory to useNavigate
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -20,7 +20,6 @@ function PasswordReset() {
     try {
       const response = await axios.get(`http://localhost:3000/api/verify-token/${token}`);
       if (response.data.message !== 'Token is valid') {
-        //toast.error('Invalid or expired token');
         console.log('Token is valid');
         navigate(`/reset-password/${token}`);
       }
