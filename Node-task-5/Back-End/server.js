@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const session = require("express-session");
-const MongoStore = require("connect-mongo"); // Import connect-mongo correctly
+const MongoStore = require("connect-mongo"); 
 
 const app = express();
 app.use(cors({
@@ -23,7 +23,7 @@ app.use(
     saveUninitialized: true,
     store: MongoStore.create({
       mongooseConnection: mongoose.connection,
-      // Provide your MongoDB connection URL directly
+      // Enter your MongoDB connection URL directly
       mongoUrl: "mongodb+srv://sathappanramesh288:Guvi123...@cluster0.bsgotks.mongodb.net/password_reset?retryWrites=true&w=majority",
     }),
   })
@@ -38,7 +38,6 @@ mongoose
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => console.log('Could not connect to MongoDB', err));
 
-// I don't know its useful or not
   mongoose
   .connect(DB_URL, {
     useNewUrlParser: true,
@@ -47,14 +46,6 @@ mongoose
 // Models 
 const Email = require('./models/emailModel');
 const Token = require('./models/tokenEmailModel');
-
-// Middleware to check if the user is authenticated
-const authenticateUser = (req, res, next) => {
-  if (!req.session.user) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
-  next();
-};
 
 // Api to enter email
 app.post('/api/enter-email', async (req, res) => {
@@ -86,7 +77,7 @@ async function generateToken(length, email) {
 
   try {
     const user = await Email.findOne({ email });
-
+// Checking user in or not
     if (!user) {
       console.log('User not found for email:', email);
       return { message: 'User not found' };
@@ -111,7 +102,6 @@ async function generateToken(length, email) {
     return { message: 'Internal server error' };
   }
 }
-
 
 // Using Nodemailer to send emails
 const tokens = [];
