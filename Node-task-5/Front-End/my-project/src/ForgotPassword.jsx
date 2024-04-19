@@ -8,7 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function ForgotPassword() {
   const [email, setEmail] = useState('');
-  //const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -64,7 +63,6 @@ function ForgotPassword() {
       </center>
     </form>
   </div>  
-
   </>
   );
 }
