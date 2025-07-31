@@ -1,0 +1,46 @@
+Blog: Understanding the Difference Between Document and Window Objects in JavaScript
+
+1. The Window Object:
+The window object is a global object in the browser environment. It represents the entire browser window
+or tab and serves as the global context for JavaScript code running in that window. Here are some key 
+aspects of the window object:
+
+Global Scope: Variables and functions declared without a specific scope are attached to the window object.
+
+Browser Properties: The window object provides access to various properties related to the browser, such as
+window.innerWidth and window.innerHeight for the viewport dimensions.
+
+2. The Document Object:
+The document object is a part of the window object and represents the HTML document displayed in the browser.
+It provides an interface to interact with the content of the web page. Key features of the document object
+include:
+
+DOM Manipulation: The document object allows developers to access and manipulate elements on the web page.
+Common tasks include selecting elements, modifying content, and changing styles.
+
+Events: The document object is involved in handling various events, such as click events, keypress events,
+and more. Event listeners can be attached to specific elements in the document.
+
+Key Differences:
+
+Scope:
+The window object represents the global context and includes variables and functions that are globally accessible.
+The document object is a subset of the window object, specifically focusing on the content and structure of the
+HTML document.
+
+Functionality:
+The window object deals with properties and methods related to the browser window, global functions, and timing events.
+The document object is concerned with manipulating the DOM, handling events within the document,
+and interacting with HTML elements.
+
+Hierarchy:
+The window object encapsulates the entire browser environment.
+The document object is nested within the window object and focuses on the content within a specific HTML document.
+
+Conclusion:
+In summary, while the window object provides a global context for JavaScript code and manages browser-related
+properties, the document object is specifically tailored for interacting with and manipulating the content of
+the HTML document. Understanding the roles and distinctions between these two objects is crucial for effective
+web development and DOM manipulation.
+
+-------------------------------------------*--------------END--------------*------------------------------------------------

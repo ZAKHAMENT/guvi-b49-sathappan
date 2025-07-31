@@ -1,0 +1,143 @@
+//Day-7
+
+//a.)
+var method = "GET";
+var url = "https://restcountries.com/v3.1/all";
+
+var xhr = new XMLHttpRequest();
+xhr.open(method, url);
+
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        var countriesDetails = JSON.parse(xhr.responseText);
+        console.log(countriesDetails);
+
+        var asiaCountries = countriesDetails.filter(country => {
+            return country.region === "Asia";
+        });
+
+        console.log("Countries in Asia:");
+        console.log(asiaCountries);
+    } else {
+        console.log("Request failed", xhr.status);
+    }
+};
+
+xhr.send();
+
+
+//b.)
+var method = "GET";
+var url = "https://restcountries.com/v3.1/all";
+
+var xhr = new XMLHttpRequest();
+xhr.open(method, url);
+
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        var countriesDetails = JSON.parse(xhr.responseText);
+        console.log(countriesDetails);
+
+        var countriesWithLowPopulation = countriesDetails.filter(country => {
+            return country.population < 200000;
+        });
+
+        console.log("Countries with population less than 2 lakhs:");
+        console.log(countriesWithLowPopulation);
+    } else {
+        console.log("Request failed", xhr.status);
+    }
+};
+
+xhr.send();
+
+
+
+//c.)
+var method = "GET";
+var url = "https://restcountries.com/v3.1/all";
+
+var xhr = new XMLHttpRequest();
+xhr.open(method, url);
+
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        var countriesDetails = JSON.parse(xhr.responseText);
+        console.log(countriesDetails);
+
+        countriesDetails.forEach(country => {
+            var name = country.name.common;
+            var capital = country.capital[0];
+            var flag = country.flags.svg;
+
+            console.log("Name:", name);
+            console.log("Capital:", capital);
+            console.log("Flag:", flag);
+            console.log("----------------------------------");
+        });
+    } else {
+        console.log("Request failed", xhr.status);
+    }
+};
+
+xhr.send();
+
+
+
+//d.)
+var method = "GET";
+var url = "https://restcountries.com/v3.1/all";
+
+var xhr = new XMLHttpRequest();
+xhr.open(method, url);
+
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        var countriesDetails = JSON.parse(xhr.responseText);
+        console.log(countriesDetails);
+
+        var totalPopulation = countriesDetails.reduce((accumulator, country) => {
+            if (country.population) {
+                return accumulator + country.population;
+            } else {
+                return accumulator;
+            }
+        }, 0);
+
+        console.log("Total population of all countries:", totalPopulation);
+    } else {
+        console.log("Request failed", xhr.status);
+    }
+};
+
+xhr.send();
+
+
+
+//e.)
+var method = "GET";
+var url = "https://restcountries.com/v3.1/all";
+
+var xhr = new XMLHttpRequest();
+xhr.open(method, url);
+
+xhr.onload = function() {
+    if (xhr.status === 200) {
+        var countriesDetails = JSON.parse(xhr.responseText);
+        console.log(countriesDetails);
+
+        for (var i = 0; i < countriesDetails.length; i++) {
+            if (countriesDetails[i].currencies != undefined) {
+                Object.keys(countriesDetails[i].currencies).forEach((key) => {
+                    if (key === "USD") {
+                        console.log(countriesDetails[i].currencies);
+                    }
+                });
+            }
+        }
+    } else {
+        console.log("Request failed", xhr.status);
+    }
+};
+
+xhr.send();
