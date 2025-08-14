@@ -1,0 +1,22 @@
+{
+  "name": "sample-ci",
+  "version": "1.0.0",
+  "description": "A sample project to test GitHub Actions CI",
+  "main": "src/index.js",
+    "type": "module",
+  "scripts": {
+  "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
