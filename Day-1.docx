@@ -1,0 +1,66 @@
+1.) HTTP 1.1 VS HTTP 2
+
+HTTP 1.1 :-
+
+                      HTTP/1.1 has been the dominant protocol for web communications for over two decades. It laid the foundation for the modern web and enabled the seamless exchange of hypertext documents between clients (web browsers) and servers.
+
+Ther are some important things HTTP 1.1 can do 
+1.Request/Response Model
+2.Head-of-Line Blocking
+3.Inefficient Header Compression
+
+HTTP 2 :-
+
+                   HTTP 2, the successor to HTTP/1.1, addresses the limitations of its predecessor while maintaining compatibility with existing web infrastructure. It introduces several key features that significantly improve web performance and efficiency.
+
+ There are some important thing HTTP 2 can do
+1. Multiplexing 
+2. Compression 
+3. Server push
+4. Dependency 
+-----------------------------------------------------------------
+
+2.) Write a blog about objects and it's internal representation in javascript 
+
+1. Objects in JavaScript:-
+ 
+In JavaScript, objects are dynamic, mutable data structures that store collections of key-value pairs, called properties. These properties can be of various data types, including primitive values, other objects, or even functions. Objects serve as the foundation for many fundamental concepts in JavaScript, such as prototypes, inheritance, and encapsulation.
+
+2. Internal representation of object :-
+
+Under the hood, JavaScript uses a mechanism called a hash table (or hash map) to implement objects efficiently. This data structure allows for fast insertion, deletion, and retrieval of key-value pairs. Each object is associated with a unique hash code, which is used as an index in the hash table to store and retrieve its properties. The hash code is calculated based on the object's properties and their values, ensuring uniqueness and efficient access.
+
+
+-----------------------------------------------------------------
+
+3.) CODEKATA 
+
+
+-----------------------------------------------------------------
+
+
+
+
+4.) Read about ip address, port, HTTP method , mac address 
+
+IP ADDRESS :-
+
+An IP address, short for Internet Protocol address, is a unique numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication.
+
+PORT :-
+
+A port number is a numerical identifier used in computer networking to identify specific processes or services running on a device. It is a 16-bit unsigned integer ranging from 0 to 65535. When data is transmitted over a network, the combination of an IP address and a port number helps route the data to the appropriate application or service on a device.
+
+HTTP METHOD :-
+
+*Get
+*Post
+*Put
+*Delete 
+
+MAC ADDRESS :-
+
+A MAC address (Media Access Control address) is a unique identifier assigned to a network interface controller (NIC) of a device. It is a hardware address that is permanently assigned during the manufacturing process. MAC addresses are used at the data link layer of the network protocol stack and primarily play a role in local area networks (LANs)
+
+
+---------------------------------------------------------------
