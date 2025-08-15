@@ -1,5 +1,5 @@
 function sayHello(name) {
   return `Hello, ${name}!`;
 }
-// exx
+// exxs
 export default sayHello;
