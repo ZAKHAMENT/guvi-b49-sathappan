@@ -1,17 +1,18 @@
-name: CI Pipeline
+name: CI
 
 on:
   push:
-<<<<<<< HEAD
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
 
     steps:
       - name: Checkout repository
@@ -20,36 +21,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: npm install
 
-=======
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      # 1. Checkout the repo
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      # 2. Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-
-      # 3. Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # 4. Run tests
->>>>>>> 7a469fc33cf33646aa46465b00be93fb0b57fbd4
       - name: Run tests
         run: npm test
+
+      - name: Build project
+        run: npm run build
